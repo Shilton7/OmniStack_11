@@ -23,7 +23,7 @@ export default function Profile() {
 		}).then(response => {
 			setIncidents(response.data);
 		});
-	}, [ongId, incidents]);
+	}, [ongId]);
 
 	async function handleDeleteIncident(id) {
 		try {
@@ -32,6 +32,9 @@ export default function Profile() {
 					Authorization: ongId
 				}
 			});
+
+			//atualizando lista
+			setIncidents(incidents.filter(incident => incident.id !== id));
 		} catch (error) {
 			alert('Erro ao deletar caso, tente novamente.');
 		}
